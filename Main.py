@@ -4,8 +4,9 @@
 
 import orthodoxcalendar
 
-input = print("Welcome, what month and year do you want to view? (MMM YYYY)")
+inputString = input("Welcome, what month and year do you want to view? (MM YYYY): ")
 
-output = orthodoxcalendar.determineDate()
+calendarList = orthodoxcalendar.monthList(inputString)
 
-print(output)
+for day in calendarList:
+	print(day)
