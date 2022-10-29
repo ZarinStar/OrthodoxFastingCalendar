@@ -12,6 +12,14 @@ import lunarcalendar
 daysOfFast = ['12-24','1-5','8-29','9-14']
 theotokoFast = ['8-1','8-2','8-3','8-4','8-5','8-6','8-7','8-8'
 				, '8-9','8-10','8-11','8-12','8-13','8-14']
+adventFast = ['11-25','11-26','11-27','11-28','11-29','11-30'
+					,'12-1','12-2','12-3','12-4','12-5','12-6','12-7','12-8'
+					,'12-9','12-10','12-11','12-12','12-13','12-14','12-15','12-16'
+					,'12-17','12-18','12-19','12-20','12-21','12-22','12-23','12-24']
+
+## Fast Free
+christmasSeason = ['12-25','12-26','12-27','12-28','12-29','12-30'
+					,'12-31','1-1','1-2','1-3','1-4']
 
 # To determine when is Easter Sunday of a particular year
 def easterSunday(yearInput):
@@ -61,6 +69,8 @@ def typeOfAbstinenceEmoji(level):
 		return ':cross_mark: :meat_on_bone:,:cheese_wedge:,:egg:'
 	elif level == 4:
 		return ':cross_mark: :meat_on_bone:'
+	elif level == 5: #Dec 13 to Dec 24 (excluding Sat/Sun) 
+		return ':cross_mark: :meat_on_bone:,:cheese_wedge:,:egg:,:fish:'
 	else:
 		return ""
 
@@ -86,8 +96,6 @@ def monthList(date):
 	firstWeekday = int(rangeTuple[0])
 	numOfDays = int(rangeTuple[1])
 
-	print(easterSunday(year)) #test
-
 	for day in range(1, numOfDays+1):
 		weekday = calendar.weekday(year,month,day)
 		fastType = determineFast(weekday, day, month, year)
@@ -109,9 +117,19 @@ def determineFast(weekdayInput, dayInput, monthInput, yearInput):
 
 	if combinedDate in daysOfFast:
 		dateType = typeOfAbstinenceEmoji(1)
-	elif combinedDate in theotokoFast and not(weekday == 2 or weekday == 4):
-		dateType = typeOfAbstinenceEmoji(3)
-	elif weekday == 2 or weekday == 4: #Wed or Fri
+	elif (weekday == 2 or weekday == 4) and not(combinedDate in christmasSeason):
 		dateType = typeOfAbstinenceEmoji(1)
+	elif (weekday == 2 or weekday == 4) and (combinedDate in adventFast):
+		dateType = typeOfAbstinenceEmoji(1)
+	elif not(weekday == 2 or weekday == 4) and (combinedDate in adventFast):
+		dateType = typeOfAbstinenceEmoji(3)
+	elif (weekday == 5 or weekday == 6) and not(combinedDate == '8-6') and (combinedDate in theotokoFast):
+		dateType = typeOfAbstinenceEmoji(1)	
+	elif not(weekday == 5 or weekday == 6) and not(combinedDate == '8-6') and (combinedDate in theotokoFast):
+		dateType = typeOfAbstinenceEmoji(2)
+	elif (combinedDate == '8-6'):
+		dateType = typeOfAbstinenceEmoji(3)
+	elif combinedDate in christmasSeason:
+		dateType = typeOfAbstinenceEmoji(0)
 
 	return dateType
