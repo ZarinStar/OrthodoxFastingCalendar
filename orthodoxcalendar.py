@@ -1,15 +1,32 @@
 #!/usr/bin/python3
 
-# To run in powershell: py Main.py3
 # Note: This uses the 'New calendar' instead of the Old calendar.
 
 import calendar
 #import emoji #https://unicode.org/emoji/charts/emoji-list.html
+from datetime import timedelta, date, datetime
+
+import lunarcalendar
 
 # MM-DD, days of Fast outside of Wed/Fri
 daysOfFast = ['12-24','1-5','8-29','9-14']
 theotokoFast = ['8-1','8-2','8-3','8-4','8-5','8-6','8-7','8-8'
 				, '8-9','8-10','8-11','8-12','8-13','8-14']
+
+# To determine when is Easter Sunday of a particular year
+def easterSunday(yearInput):
+	# First Sunday after the first full moon that falls on or after March 21 (Julian calendar)
+
+	firstFullMoon = lunarcalendar.paschalFullMoon(yearInput)
+	return firstFullMoon #test
+
+# To determine when is Pentecost (7th Sunday after Easter)
+def pentecostSunday():
+	return ""
+
+# To determine when is All Saints' Day (Sunday after Pentecost)
+def allSaintsSunday():
+	return ""
 
 def typeOfAllowedEmoji(level):
 	# positive messages instead
@@ -49,6 +66,8 @@ def monthList(date):
 	rangeTuple = calendar.monthrange(year, month) #returns tuple (weekday, num of days)
 	firstWeekday = int(rangeTuple[0])
 	numOfDays = int(rangeTuple[1])
+
+	print(easterSunday(year)) #test
 
 	for day in range(1, numOfDays+1):
 		weekday = calendar.weekday(year,month,day)
