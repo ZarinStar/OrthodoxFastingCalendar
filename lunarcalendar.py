@@ -5,7 +5,7 @@ from datetime import timedelta, date, datetime
 """
 Test:
 
-2019 - March 20, 2019 > April 19 (Geo) - (Jul) - (Orthodox Easter: April 28)
+2019 - March 20, 2019 > April 19 - (Orthodox Easter: April 28)
 	April 19 = 9 days later
 2020 - April 7 (Orthodox Easter: April 19)
 2021 - March 28 (Orthodox Easter: May 2)

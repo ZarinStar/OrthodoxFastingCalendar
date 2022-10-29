@@ -17,16 +17,35 @@ theotokoFast = ['8-1','8-2','8-3','8-4','8-5','8-6','8-7','8-8'
 def easterSunday(yearInput):
 	# First Sunday after the first full moon that falls on or after March 21 (Julian calendar)
 
-	firstFullMoon = lunarcalendar.paschalFullMoon(yearInput)
-	return firstFullMoon #test
+	#firstFullMoon = lunarcalendar.paschalFullMoon(yearInput)
+	if int(yearInput) == 2022:
+		return '4-24'
+	elif int(yearInput) == 2023:
+		return '4-16'
+	elif int(yearInput) == 2024:
+		return '5-5'
+
+	#return firstFullMoon #test
 
 # To determine when is Pentecost (7th Sunday after Easter)
-def pentecostSunday():
-	return ""
+def pentecostSunday(yearInput):
+
+	date = easterSunday(yearInput)
+	easterString = str(date)
+	easterDate = datetime.strptime(easterString, "%m-%d")
+	pentecostDate = easterDate + timedelta(days=49)
+	pentecostDate = str(pentecostDate)
+
+	return pentecostDate
 
 # To determine when is All Saints' Day (Sunday after Pentecost)
-def allSaintsSunday():
-	return ""
+def allSaintsSunday(yearInput):
+	pentecostString = pentecostSunday(yearInput)
+	pentecostDate = datetime.strptime(pentecostString, "%m-%d")
+	allSaintsSunday = pentecostDate + timedelta(days=7)
+	allSaintsSunday = str(allSaintsSunday)
+
+	return allSaintsSunday
 
 def typeOfAllowedEmoji(level):
 	# positive messages instead
